@@ -6,6 +6,8 @@ class PointerSettings extends ChangeNotifier{
   final bool vertical;
   final bool horizontal;
   final bool circle;
+  final bool verticalTriangle;
+  final bool horizontalTriangle;
   final DataSortType sortHorizontalLabels;
   final DataSortType sortVerticalLabels;
 
@@ -32,6 +34,8 @@ class PointerSettings extends ChangeNotifier{
     this.circle = true,
     this.horizontal = true,
     this.vertical = true,
+    this.verticalTriangle = false,
+    this.horizontalTriangle = false,
     this.sortHorizontalLabels = DataSortType.asc,
     this.sortVerticalLabels = DataSortType.des,
     double? dataHorizontal,

@@ -5,3 +5,5 @@ enum TuningCalculatorType { step, percent, numeric }
 enum UpdateType { action, setLabels, none }
 
 enum DataSortType{ des, asc }
+
+enum TableType{ tune, preview }

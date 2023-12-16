@@ -57,6 +57,8 @@ class _PointerTableState extends State<PointerTable> {
         isShowVerticalLine: widget.pointerSettings!.vertical,
         isShowHorizontalLine: widget.pointerSettings!.horizontal,
         isShowCircle: widget.pointerSettings!.circle,
+        isShowVerticalTriangle: widget.pointerSettings!.verticalTriangle,
+        isShowHorizontalTriangle: widget.pointerSettings!.horizontalTriangle,
         sortHorizontalLabels: widget.pointerSettings!.sortHorizontalLabels,
         sortVerticalLabels: widget.pointerSettings!.sortVerticalLabels,
       ),

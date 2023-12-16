@@ -95,4 +95,6 @@ abstract class TuningTable2DInterface {
   });
 
   void refresh();
+
+  void setSettingLabelOff();
 }

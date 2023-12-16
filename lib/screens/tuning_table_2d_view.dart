@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tuning_table/shared/widgets/pointer_table/pointer_table.dart';
 
+import '../data/models/enum_types.dart';
 import '../data/models/point_model.dart';
 import '../data/models/pointer_offset_model.dart';
 import '../data/models/pointer_settings.dart';
@@ -24,6 +25,7 @@ class TuningTable2dView extends StatefulWidget {
     this.headerStyle,
     this.bodyStyle,
     this.pointerSettings,
+    this.tableType = TableType.tune,
   });
 
   final double width;
@@ -36,6 +38,7 @@ class TuningTable2dView extends StatefulWidget {
   final TextStyle? headerStyle;
   final TextStyle? bodyStyle;
   final PointerSettings? pointerSettings;
+  final TableType tableType;
 
   @override
   State<TuningTable2dView> createState() => _TableTune2dViewState();
@@ -81,70 +84,81 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: GestureDetector(
-        onPanStart: (a) {
-          _onDetectStart(a.localPosition);
-        },
-        onPanUpdate: (a) {
-          _onDetectUpdate(a.localPosition);
-        },
-        onPanEnd: (a) {
-          _onDetectEnd();
-        },
-        child: StreamBuilder(
-          stream: widget.controller.updateData,
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            return Container(
-              width: widget.width,
-              height: widget.height,
-              color: Colors.grey,
-              padding: EdgeInsets.only(
-                left: widget.sizeSpace,
-                top: widget.sizeSpace,
-              ),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  ShowTable2d(
-                    verticalLabels: widget.controller.verticalLabels,
-                    horizontalLabels: widget.controller.horizontalLabels,
-                    configTunes: widget.controller.data,
-                    sizeSpace: widget.sizeSpace,
-                    verticalName: widget.verticalName,
-                    horizontalName: widget.horizontalName,
-                    horizontalDecimal: widget.controller.horizontalDecimal,
-                    verticalDecimal: widget.controller.verticalDecimal,
-                    valueDecimal: widget.controller.valueDecimal,
-                    labelStyle: widget.labelStyle,
-                    headerStyle: widget.headerStyle,
-                    bodyStyle: widget.bodyStyle,
+      child: Stack(
+        fit:  StackFit.expand,
+        children: [
+          GestureDetector(
+            onPanStart: (a) {
+              _onDetectStart(a.localPosition);
+            },
+            onPanUpdate: (a) {
+              _onDetectUpdate(a.localPosition);
+            },
+            onPanEnd: (a) {
+              _onDetectEnd();
+            },
+            child: StreamBuilder(
+              stream: widget.controller.updateData,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                return Container(
+                  width: widget.width,
+                  height: widget.height,
+                  color: Colors.grey,
+                  padding: EdgeInsets.only(
+                    left: widget.sizeSpace,
+                    top: widget.sizeSpace,
                   ),
-                  PointerTable(
-                    controller: widget.controller,
-                    pointerSettings: widget.pointerSettings,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      ShowTable2d(
+                        verticalLabels: widget.controller.verticalLabels,
+                        horizontalLabels: widget.controller.horizontalLabels,
+                        configTunes: widget.controller.data,
+                        sizeSpace: widget.sizeSpace,
+                        verticalName: widget.verticalName,
+                        horizontalName: widget.horizontalName,
+                        horizontalDecimal: widget.controller.horizontalDecimal,
+                        verticalDecimal: widget.controller.verticalDecimal,
+                        valueDecimal: widget.controller.valueDecimal,
+                        labelStyle: widget.labelStyle,
+                        headerStyle: widget.headerStyle,
+                        bodyStyle: widget.bodyStyle,
+                      ),
+                      PointerTable(
+                        controller: widget.controller,
+                        pointerSettings: widget.pointerSettings,
+                      ),
+                      ShowSetting2D(
+                        isOpen: widget.controller.isSettingLabel,
+                        width: widget.width,
+                        height: widget.height,
+                        horizontalName: widget.horizontalName,
+                        verticalName: widget.verticalName,
+                        labelStyle: widget.labelStyle,
+                        verticalLabels: widget.controller.verticalLabels,
+                        horizontalLabels: widget.controller.horizontalLabels,
+                        configTunes: widget.controller.data,
+                        sizeSpace: widget.sizeSpace,
+                        horizontalDecimal: widget.controller.horizontalDecimal,
+                        verticalDecimal: widget.controller.verticalDecimal,
+                        headerStyle: widget.headerStyle,
+                        onPressedSave: onPressedSave,
+                        onPressedCancel: onPressedCancel,
+                      ),
+                    ],
                   ),
-                  ShowSetting2D(
-                    isOpen: widget.controller.isSettingLabel,
-                    width: widget.width,
-                    height: widget.height,
-                    horizontalName: widget.horizontalName,
-                    verticalName: widget.verticalName,
-                    labelStyle: widget.labelStyle,
-                    verticalLabels: widget.controller.verticalLabels,
-                    horizontalLabels: widget.controller.horizontalLabels,
-                    configTunes: widget.controller.data,
-                    sizeSpace: widget.sizeSpace,
-                    horizontalDecimal: widget.controller.horizontalDecimal,
-                    verticalDecimal: widget.controller.verticalDecimal,
-                    headerStyle: widget.headerStyle,
-                    onPressedSave: onPressedSave,
-                    onPressedCancel: onPressedCancel,
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+          if(widget.tableType == TableType.preview)
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.black.withOpacity(0.1),
+            ),
+        ],
       ),
     );
   }
@@ -154,7 +168,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
   }
 
   void onPressedCancel() {
-    widget.controller.isSettingLabel = false;
+    widget.controller.setSettingLabelOff();
     widget.controller.setLabels(
       widget.controller.verticalLabels,
       widget.controller.horizontalLabels,

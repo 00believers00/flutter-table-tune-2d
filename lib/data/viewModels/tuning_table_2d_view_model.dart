@@ -25,6 +25,7 @@ class TuningTable2DViewModel {
   set isSettingLabel(v) {
     _isSettingLabel = v;
     _setUpdateData();
+    updateCurrentMinMax();
   }
 
   TuningAxisType labelActiveAxis = TuningAxisType.none;
@@ -457,6 +458,7 @@ class TuningTable2DViewModel {
     }else{
       currentMinMax = dataMinMax;
     }
+    _setUpdateData();
   }
 
   double _checkMinMaxData(double data) {
