@@ -40,7 +40,6 @@ class TuningTableController extends TuningTable2DInterface {
   @override
   bool get isSettingLabel => _tuningTable2DViewModel.isSettingLabel;
 
-  set isSettingLabel(v) => _tuningTable2DViewModel.isSettingLabel = v;
 
   @override
   TuningMinMax get horizontalMinMax => _tuningTable2DViewModel.horizontalMinMax;
@@ -200,5 +199,10 @@ class TuningTableController extends TuningTable2DInterface {
   @override
   void refresh() {
     _tuningTable2DViewModel.updateData.add(UpdateType.action);
+  }
+
+  @override
+  void setSettingLabelOff() {
+    _tuningTable2DViewModel.isSettingLabel = false;
   }
 }

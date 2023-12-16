@@ -5,7 +5,6 @@ import '../../../data/models/enum_types.dart';
 import '../../utils/pointer_table_helpers.dart';
 
 class DrawPointerTablePainter extends CustomPainter {
-
   final double widthSizeBoxAlone;
   final double heightSizeBoxAlone;
 
@@ -20,6 +19,8 @@ class DrawPointerTablePainter extends CustomPainter {
   final bool isShowVerticalLine;
   final bool isShowHorizontalLine;
   final bool isShowCircle;
+  final bool isShowHorizontalTriangle;
+  final bool isShowVerticalTriangle;
 
   final DataSortType sortHorizontalLabels;
   final DataSortType sortVerticalLabels;
@@ -35,6 +36,8 @@ class DrawPointerTablePainter extends CustomPainter {
     this.isShowVerticalLine = true,
     this.isShowHorizontalLine = true,
     this.isShowCircle = true,
+    this.isShowHorizontalTriangle = false,
+    this.isShowVerticalTriangle = false,
     this.sortHorizontalLabels = DataSortType.asc,
     this.sortVerticalLabels = DataSortType.des,
   });
@@ -59,7 +62,7 @@ class DrawPointerTablePainter extends CustomPainter {
       sortType: sortHorizontalLabels,
     );
 
-//IndependentPointer
+    //IndependentPointer
     double pointX = widthSizeBoxAlone + horizontalLocation;
     double pointY = heightSizeBoxAlone + verticalLocation;
     Offset center = Offset(pointX, pointY);
@@ -99,6 +102,35 @@ class DrawPointerTablePainter extends CustomPainter {
         center: center,
       );
     }
+
+    Paint paintMark = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.red
+      ..strokeWidth = 1;
+
+    double heightTriangle = (heightSizeBoxAlone / 3.5);
+    double widthTriangle = (widthSizeBoxAlone / 3.5);
+
+    if (isShowHorizontalTriangle) {
+      drawHorizontalTriangle(
+        canvas: canvas,
+        pointX: pointX,
+        heightTriangle: heightTriangle,
+        widthTriangle: widthTriangle,
+        paintMark: paintMark,
+      );
+    }
+
+    if (isShowVerticalTriangle) {
+      drawVerticalTriangle(
+        canvas: canvas,
+        pointY: pointY,
+        heightTriangle: heightTriangle,
+        widthTriangle: widthTriangle,
+        paintMark: paintMark,
+      );
+    }
+
   }
 
   void drawIndependentPointer({
@@ -179,6 +211,76 @@ class DrawPointerTablePainter extends CustomPainter {
       Offset(sizeEnd, pointY),
       paintLine,
     );
+  }
+
+  void drawHorizontalTriangle({
+    required Canvas canvas,
+    required double pointX,
+    required double heightTriangle,
+    required double widthTriangle,
+    required Paint paintMark,
+  }) {
+    // Right Triangle
+    Path path = Path();
+    path.addPolygon(
+      [
+        Offset(pointX, heightTriangle),
+        Offset(pointX, 0),
+        Offset(pointX + widthTriangle, 0),
+      ],
+      true,
+    );
+
+    canvas.drawPath(path, paintMark);
+
+    // Left Triangle
+    path = Path();
+
+    path.addPolygon(
+      [
+        Offset(pointX, heightTriangle),
+        Offset(pointX, 0),
+        Offset(pointX - widthTriangle, 0),
+      ],
+      true,
+    );
+
+    canvas.drawPath(path, paintMark);
+  }
+
+  void drawVerticalTriangle({
+    required Canvas canvas,
+    required double pointY,
+    required double heightTriangle,
+    required double widthTriangle,
+    required Paint paintMark,
+  }) {
+    // Bottom Triangle
+    Path path = Path();
+    path.addPolygon(
+      [
+        Offset(widthTriangle, pointY),
+        Offset(0, pointY),
+        Offset(0 , pointY + widthTriangle),
+      ],
+      true,
+    );
+
+    canvas.drawPath(path, paintMark);
+
+    // Top Triangle
+    path = Path();
+
+    path.addPolygon(
+      [
+        Offset(widthTriangle, pointY),
+        Offset(0, pointY),
+        Offset(0 , pointY - widthTriangle),
+      ],
+      true,
+    );
+
+    canvas.drawPath(path, paintMark);
   }
 
   @override
