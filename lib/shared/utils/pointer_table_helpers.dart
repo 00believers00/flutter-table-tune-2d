@@ -10,11 +10,10 @@ class PointerTableHelpers {
     required List<double> labels,
     required DataSortType sortType,
   }) {
-
     late int index;
-    late double process,max, min;
+    late double process, max, min;
 
-    switch(sortType){
+    switch (sortType) {
       case DataSortType.des:
         max = labels[0];
         min = labels[labels.length - 1];
@@ -26,12 +25,13 @@ class PointerTableHelpers {
         max = labels[labels.length - 1];
         min = labels[0];
         process = _checkDataMinMax(min: min, max: max, data: data);
-
-        index = labels.indexWhere((element) => process <= element);
+        if (min == 0 && process < 1) {
+          index = 0;
+        } else {
+          index = labels.indexWhere((element) => process <= element);
+        }
         break;
     }
-
-
 
     return _location(
       process: process,
@@ -39,6 +39,7 @@ class PointerTableHelpers {
       sizeBoxAlone: sizeBoxAlone,
       sizeSpace: sizeSpace,
       labels: labels,
+      sortType: sortType,
     );
   }
 
@@ -48,23 +49,51 @@ class PointerTableHelpers {
     required double sizeBoxAlone,
     required double sizeSpace,
     required List<double> labels,
+    required DataSortType sortType,
   }) {
     double lastLocation = _calLocationPoint(sizeBoxAlone, index);
 
     int idxPrevious = index - 1;
     if (idxPrevious > 0) {
-      double pointNowData = labels[index];
-      double pointPreviousData = labels[index - 1];
-      double dif = pointPreviousData - pointNowData;
-      double locationNow = _calLocationPoint(sizeBoxAlone, index);
-      double locationPrevious = _calLocationPoint(sizeBoxAlone, index - 1);
-      double difLocation = locationPrevious - locationNow;
-      double partOverData = process - pointNowData;
-      double location = (difLocation * partOverData) / dif;
-      lastLocation += (location - (sizeSpace * index));
+      lastLocation += _calLastLocation(
+        index: index,
+        idxPrevious: idxPrevious,
+        sizeBoxAlone: sizeBoxAlone,
+        sizeSpace: sizeSpace,
+        labels: labels,
+        process: process,
+      );
+    } else if (sortType == DataSortType.asc) {
+      lastLocation += _calLastLocation(
+        index: index,
+        idxPrevious: index + 1,
+        sizeBoxAlone: sizeBoxAlone,
+        sizeSpace: sizeSpace,
+        labels: labels,
+        process: process,
+      );
     }
 
     return lastLocation;
+  }
+
+  double _calLastLocation({
+    required int index,
+    required int idxPrevious,
+    required double sizeBoxAlone,
+    required double sizeSpace,
+    required List<double> labels,
+    required double process,
+  }) {
+    double pointNowData = labels[index];
+    double pointPreviousData = labels[idxPrevious];
+    double dif = pointPreviousData - pointNowData;
+    double locationNow = _calLocationPoint(sizeBoxAlone, index);
+    double locationPrevious = _calLocationPoint(sizeBoxAlone, idxPrevious);
+    double difLocation = locationPrevious - locationNow;
+    double partOverData = process - pointNowData;
+    double location = (difLocation * partOverData) / dif;
+    return (location - (sizeSpace * index));
   }
 
   double _calLocationPoint(double sizeBoxAlone, int index) {
