@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tuning_table/tuning_table.dart';
 
-import '../../data/models/point_model.dart';
-import '../extensions/decimal.dart';
 import '../utils/table_tune_2d_helpers.dart';
 
 class ShowTable2d extends StatelessWidget {
@@ -16,6 +15,7 @@ class ShowTable2d extends StatelessWidget {
     required this.horizontalDecimal,
     required this.verticalDecimal,
     required this.valueDecimal,
+    required this.valueMinMax,
     this.labelStyle,
     this.headerStyle,
     this.bodyStyle,
@@ -32,6 +32,7 @@ class ShowTable2d extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextStyle? headerStyle;
   final TextStyle? bodyStyle;
+  final TuningMinMax valueMinMax;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class ShowTable2d extends StatelessWidget {
               } else if (idxV == 0 || idxH == 0) {
                 final dec = idxV == 0 ? horizontalDecimal : verticalDecimal;
                 bool disableText = false;
-                if(verticalLabels.length == 1 && idxH == 0){
+                if (verticalLabels.length == 1 && idxH == 0) {
                   disableText = true;
                 }
                 return LabelHeaderTableTune2d(
@@ -74,6 +75,7 @@ class ShowTable2d extends StatelessWidget {
                 sizeSpace: sizeSpace,
                 decimalType: valueDecimal,
                 textStyle: bodyStyle,
+                minMax: valueMinMax,
               );
             }),
           ),
@@ -221,11 +223,13 @@ class LabelBodyTableTune2d extends StatelessWidget {
     required this.sizeSpace,
     required this.decimalType,
     this.textStyle,
+    this.minMax = const TuningMinMax(min: -100, max: 100),
   }) : super(key: key);
   final TuningPointModel data;
   final double sizeSpace;
   final DecimalType decimalType;
   final TextStyle? textStyle;
+  final TuningMinMax minMax;
 
   @override
   Widget build(BuildContext context) {
@@ -245,8 +249,14 @@ class LabelBodyTableTune2d extends StatelessWidget {
           right: sizeSpace,
           bottom: sizeSpace,
         ),
-        color:
-            statusPoint ? Colors.grey : helps.calColor(-100, 100, value, false),
+        color: statusPoint
+            ? Colors.grey
+            : helps.calColor(
+                minMax.min,
+                minMax.max,
+                value,
+                false,
+              ),
         child: Center(
           child: Text(
             text,
