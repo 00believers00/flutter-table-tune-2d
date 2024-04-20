@@ -1,3 +1,5 @@
+## [0.0.4] - Update 2024-04-20
+- Adjust label colors to align with table value range.
 ## [0.0.2] - Update 2023-12-16
 - Update Flutter 3.16.4
 - Add preview table.

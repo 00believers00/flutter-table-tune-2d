@@ -124,6 +124,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
                         labelStyle: widget.labelStyle,
                         headerStyle: widget.headerStyle,
                         bodyStyle: widget.bodyStyle,
+                        valueMinMax: widget.controller.dataMinMax,
                       ),
                       PointerTable(
                         controller: widget.controller,
