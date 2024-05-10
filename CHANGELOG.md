@@ -1,3 +1,5 @@
+## [0.0.5] - Update 2024-05-10
+- Fix setup Horizontal Labels wrong.
 ## [0.0.4] - Update 2024-04-20
 - Adjust label colors to align with table value range.
 ## [0.0.2] - Update 2023-12-16
