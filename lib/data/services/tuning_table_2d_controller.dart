@@ -93,7 +93,7 @@ class TuningTableController extends TuningTable2DInterface {
 
   @override
   void setHorizontalLabels(List<double> labels) {
-    _tuningTable2DViewModel.setVerticalLabels(labels);
+    _tuningTable2DViewModel.setHorizontalLabels(labels);
   }
 
   @override
