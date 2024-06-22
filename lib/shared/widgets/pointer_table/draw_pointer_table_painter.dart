@@ -53,6 +53,7 @@ class DrawPointerTablePainter extends CustomPainter {
       labels: verticalLabels,
       sortType: sortVerticalLabels,
     );
+    print('verticalLocation: $verticalLocation');
 
     double horizontalLocation = pointerHelps.callLocation(
       data: horizontalData,
@@ -130,7 +131,6 @@ class DrawPointerTablePainter extends CustomPainter {
         paintMark: paintMark,
       );
     }
-
   }
 
   void drawIndependentPointer({
@@ -261,7 +261,7 @@ class DrawPointerTablePainter extends CustomPainter {
       [
         Offset(widthTriangle, pointY),
         Offset(0, pointY),
-        Offset(0 , pointY + widthTriangle),
+        Offset(0, pointY + widthTriangle),
       ],
       true,
     );
@@ -275,7 +275,7 @@ class DrawPointerTablePainter extends CustomPainter {
       [
         Offset(widthTriangle, pointY),
         Offset(0, pointY),
-        Offset(0 , pointY - widthTriangle),
+        Offset(0, pointY - widthTriangle),
       ],
       true,
     );

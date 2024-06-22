@@ -16,13 +16,14 @@ class PointerTableHelpers {
     switch (sortType) {
       case DataSortType.des:
         max = labels[0];
-        min = labels[labels.length - 1];
+        min = labels.last;
         process = _checkDataMinMax(min: min, max: max, data: data);
-
-        index = labels.indexWhere((element) => process >= element);
+        final list = labels.reversed.toList();
+        index = list.indexWhere((element) => process >= element);
+        index = labels.indexWhere((element) => index == element);
         break;
       case DataSortType.asc:
-        max = labels[labels.length - 1];
+        max = labels.last;
         min = labels[0];
         process = _checkDataMinMax(min: min, max: max, data: data);
         if (min == 0 && process < 1) {
