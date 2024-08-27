@@ -1,3 +1,5 @@
+## [0.0.7] - Update 2024-08-27
+- Fixed incorrect display of vertical sorting type DES of display pointer data over min-max.
 ## [0.0.6] - Update 2024-06-22
 - Fixed incorrect display of vertical sorting type DES of display pointer data.
 ## [0.0.5] - Update 2024-05-10

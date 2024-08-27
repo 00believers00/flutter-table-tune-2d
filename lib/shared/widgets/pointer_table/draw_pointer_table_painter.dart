@@ -53,7 +53,6 @@ class DrawPointerTablePainter extends CustomPainter {
       labels: verticalLabels,
       sortType: sortVerticalLabels,
     );
-    print('verticalLocation: $verticalLocation');
 
     double horizontalLocation = pointerHelps.callLocation(
       data: horizontalData,
