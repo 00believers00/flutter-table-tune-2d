@@ -62,7 +62,7 @@ class PointerTableHelpers {
         labels: labels,
         process: process,
       );
-    } else if (sortType == DataSortType.asc) {
+    } else {
       lastLocation += _calLastLocation(
         index: index,
         idxPrevious: index + 1,
