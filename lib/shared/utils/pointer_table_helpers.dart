@@ -18,9 +18,7 @@ class PointerTableHelpers {
         max = labels[0];
         min = labels.last;
         process = _checkDataMinMax(min: min, max: max, data: data);
-        final list = labels.reversed.toList();
-        index = list.indexWhere((element) => process >= element);
-        index = labels.indexWhere((element) => index == element);
+        index = labels.indexWhere((element) => process >= element);
         break;
       case DataSortType.asc:
         max = labels.last;
