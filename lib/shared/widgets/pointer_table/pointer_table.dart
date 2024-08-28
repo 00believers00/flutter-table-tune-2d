@@ -73,10 +73,10 @@ class _PointerTableState extends State<PointerTable> {
       int i = 0;
       //angleShowScaleRpm = 0;
       _timerLoopSmoothData =
-          Timer.periodic(const Duration(milliseconds: 20), (t) {
+          Timer.periodic(const Duration(milliseconds: 10), (t) {
             i++;
-            valueHOld += ((valueH - valueHOld) * 0.1); //0.03 , 0.3
-            valueVOld += ((valueV - valueVOld) * 0.1); //0.03 , 0.3
+            valueHOld += ((valueH - valueHOld) * 0.22); //0.03 , 0.3
+            valueVOld += ((valueV - valueVOld) * 0.22); //0.03 , 0.3
             if (i == 400) {
               _stopTimerLoopSmoothData();
             }
