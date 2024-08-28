@@ -1,3 +1,7 @@
+## [0.0.9] - Update 2024-08-28
+- Update speed pointer vertical and horizontal
+## [0.0.8] - Update 2024-08-27
+- Fixed incorrect display of vertical sorting type DES of display pointer value 100.
 ## [0.0.7] - Update 2024-08-27
 - Fixed incorrect display of vertical sorting type DES of display pointer data over min-max.
 ## [0.0.6] - Update 2024-06-22
