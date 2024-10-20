@@ -1,5 +1,7 @@
+## [0.0.11] - Update 2024-08-28
+- Fixed incorrect pointer vertical and horizontal calculator position when length is less than 2
 ## [0.0.10] - Update 2024-08-28
-- Fix speed pointer vertical and horizontal to loop 10 ms and mul 0.1
+- Fixed speed pointer vertical and horizontal to loop 10 ms and mul 0.1
 ## [0.0.9] - Update 2024-08-28
 - Update speed pointer vertical and horizontal
 ## [0.0.8] - Update 2024-08-27

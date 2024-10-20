@@ -12,7 +12,9 @@ class PointerTableHelpers {
   }) {
     late int index;
     late double process, max, min;
-
+    if(labels.length < 2) {
+      return 0;
+    }
     switch (sortType) {
       case DataSortType.des:
         max = labels[0];
