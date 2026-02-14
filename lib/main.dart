@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ],
     verticalLabels: <double>[98, 85, 75, 50, 25, 12, 1, 0],
   );
-  final newV = <double>[80,70,60, 30, 45, 30, 25, 12, 1, 0];
+  final newV = <double>[80, 70, 60, 30, 45, 30, 25, 12, 1, 0];
   final newH = <double>[
     0,
     1333,
@@ -67,6 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
     11887,
     12000
   ];
+
+  @override
+  void initState() {
+    controllerTable.setMinMax(
+      horizontal: const TuningMinMax(min: 0, max: 20000),
+      vertical: const TuningMinMax(min: 0, max: 100),
+      data: const TuningMinMax(min: -100, max: 100),
+    );
+    controllerTable.updateData.listen((_) {
+      if(mounted){
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'min: ${controllerTable.currentMinMax.min} - max: ${controllerTable.currentMinMax.max}',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               TuningTable2dView(
                 width: 800,
                 height: 250,
@@ -121,6 +144,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     },
                     child: const Text('N 40'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      controllerTable.calculator(
+                        TuningCalculatorType.numeric,
+                        25000,
+                      );
+                    },
+                    child: const Text('N 25000'),
                   ),
                   ElevatedButton(
                     onPressed: () {

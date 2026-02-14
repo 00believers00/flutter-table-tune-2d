@@ -3,15 +3,12 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll": "explicit"
   },
-  "dart.flutterSdkPath": ".fvm/flutter_sdk",
-  // Remove .fvm files from search
+  "dart.flutterSdkPath": ".fvm/versions/3.35.3",
   "search.exclude": {
     "**/.fvm": true
   },
-  // Remove from file watching
   "files.watcherExclude": {
     "**/.fvm": true
   },
-  // Trun off inline path folder inside folder.
-  "explorer.compactFolders": false,
+  "explorer.compactFolders": false
 }

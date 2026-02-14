@@ -48,4 +48,6 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-.fvm/flutter_sdk
+
+# FVM Version Cache
+.fvm/

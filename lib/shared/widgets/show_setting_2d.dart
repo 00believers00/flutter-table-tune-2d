@@ -49,7 +49,7 @@ class ShowSetting2D extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      color: Colors.black.withOpacity(0.7),
+      color: Colors.black.withValues(alpha: 0.7),
       child: Stack(
         fit: StackFit.expand,
         children: [

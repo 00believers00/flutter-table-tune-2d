@@ -157,7 +157,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
             ),
         ],
       ),

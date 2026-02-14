@@ -145,8 +145,8 @@ class TuningTable2DViewModel {
     _heightSizeBoxAlone = (_height / lengthVertical) + _sizeSpace;
   }
 
-  DecimalType _checkCurrentDecimal(){
-    switch(labelActiveAxis){
+  DecimalType _checkCurrentDecimal() {
+    switch (labelActiveAxis) {
       case TuningAxisType.horizontal:
         return horizontalDecimal;
       case TuningAxisType.vertical:
@@ -189,6 +189,7 @@ class TuningTable2DViewModel {
     _clearSelectAll();
     if (!isSettingLabel) {
       _updateDataLabels();
+      clearLabels();
       Future.delayed(const Duration(milliseconds: 300), () {
         updateData.add(UpdateType.setLabels);
       });
@@ -226,6 +227,16 @@ class TuningTable2DViewModel {
       }
     }
     setData(raw);
+  }
+
+  void checkLabelActiveAxis() {
+    if (startPosition.y == 0) {
+      labelActiveAxis = TuningAxisType.horizontal;
+    } else if (startPosition.x == 0) {
+      labelActiveAxis = TuningAxisType.vertical;
+    } else {
+      labelActiveAxis = TuningAxisType.none;
+    }
   }
 
   void clearLabels() {
@@ -448,14 +459,15 @@ class TuningTable2DViewModel {
     ];
   }
 
-  void updateCurrentMinMax(){
+  void updateCurrentMinMax() {
+    checkLabelActiveAxis();
     if (isSettingLabel) {
-      if(labelActiveAxis == TuningAxisType.vertical){
+      if (labelActiveAxis == TuningAxisType.vertical) {
         currentMinMax = verticalMinMax;
-      }else if(labelActiveAxis == TuningAxisType.horizontal){
+      } else if (labelActiveAxis == TuningAxisType.horizontal) {
         currentMinMax = horizontalMinMax;
       }
-    }else{
+    } else {
       currentMinMax = dataMinMax;
     }
     _setUpdateData();

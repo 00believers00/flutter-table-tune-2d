@@ -70,7 +70,7 @@ class DrawPointerTablePainter extends CustomPainter {
 
     Paint paintLine = Paint()
       ..style = PaintingStyle.stroke
-      ..color = Colors.red.withOpacity(0.3)
+      ..color = Colors.red.withValues(alpha: 0.3)
       ..strokeWidth = 1;
 
     if (isShowHorizontalLine) {
@@ -141,11 +141,11 @@ class DrawPointerTablePainter extends CustomPainter {
     Path path = Path();
     Paint paintCircleWhite = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.white.withOpacity(0.4)
+      ..color = Colors.white.withValues(alpha: 0.4)
       ..strokeWidth = 1;
 
     Paint paintCircleBrown = paintCircleWhite
-      ..color = Colors.brown.withOpacity(0.5);
+      ..color = Colors.brown.withValues(alpha: 0.5);
 
     path.moveTo(center.dx, center.dy);
 
