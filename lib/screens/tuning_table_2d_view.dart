@@ -26,6 +26,7 @@ class TuningTable2dView extends StatefulWidget {
     this.bodyStyle,
     this.pointerSettings,
     this.tableType = TableType.tune,
+    this.invertColor = false,
   });
 
   final double width;
@@ -39,7 +40,7 @@ class TuningTable2dView extends StatefulWidget {
   final TextStyle? bodyStyle;
   final PointerSettings? pointerSettings;
   final TableType tableType;
-
+  final bool invertColor;
   @override
   State<TuningTable2dView> createState() => _TableTune2dViewState();
 }
@@ -125,6 +126,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
                         headerStyle: widget.headerStyle,
                         bodyStyle: widget.bodyStyle,
                         valueMinMax: widget.controller.dataMinMax,
+                        invertColor: widget.invertColor,
                       ),
                       PointerTable(
                         controller: widget.controller,

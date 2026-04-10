@@ -19,6 +19,7 @@ class ShowTable2d extends StatelessWidget {
     this.labelStyle,
     this.headerStyle,
     this.bodyStyle,
+    this.invertColor = false,
   }) : super(key: key);
   final List<double> horizontalLabels;
   final List<double> verticalLabels;
@@ -33,7 +34,7 @@ class ShowTable2d extends StatelessWidget {
   final TextStyle? headerStyle;
   final TextStyle? bodyStyle;
   final TuningMinMax valueMinMax;
-
+  final bool invertColor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,6 +77,7 @@ class ShowTable2d extends StatelessWidget {
                 decimalType: valueDecimal,
                 textStyle: bodyStyle,
                 minMax: valueMinMax,
+                invertColor: invertColor,
               );
             }),
           ),
@@ -224,13 +226,14 @@ class LabelBodyTableTune2d extends StatelessWidget {
     required this.decimalType,
     this.textStyle,
     this.minMax = const TuningMinMax(min: -100, max: 100),
+    this.invertColor = false,
   }) : super(key: key);
   final TuningPointModel data;
   final double sizeSpace;
   final DecimalType decimalType;
   final TextStyle? textStyle;
   final TuningMinMax minMax;
-
+  final bool invertColor;
   @override
   Widget build(BuildContext context) {
     bool statusPoint = data.status ?? false;
@@ -255,7 +258,7 @@ class LabelBodyTableTune2d extends StatelessWidget {
                 minMax.min,
                 minMax.max,
                 value,
-                false,
+                invertColor,
               ),
         child: Center(
           child: Text(
