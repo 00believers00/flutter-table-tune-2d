@@ -1,3 +1,5 @@
+## ## [0.0.13] - Update 2026-04-10
+- Fix Edited TuningTable2dView to add a variable for inverting colors in the table. 
 ## [0.0.12] - Update 2026-02-15
 - Fix bug in SettingLabel mode: when a label is selected and then exiting from SettingLabel mode, the selected label remains active
 - Fix bug in SettingLabel mode: when selecting 1 label, the min max values of the Axis do not update
