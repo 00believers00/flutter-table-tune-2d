@@ -22,6 +22,8 @@ class ShowSetting2D extends StatelessWidget {
     required this.horizontalName,
     required this.verticalName,
     this.labelStyle,
+    this.textCancel,
+    this.textSave,
   });
 
   final bool isOpen;
@@ -39,6 +41,8 @@ class ShowSetting2D extends StatelessWidget {
   final VoidCallback? onPressedSave;
   final VoidCallback? onPressedCancel;
   final TextStyle? labelStyle;
+  final Widget? textSave;
+  final Widget? textCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +87,7 @@ class ShowSetting2D extends StatelessWidget {
                       );
                     } else if (idxH == 0) {
                       bool disableText = false;
-                      if(verticalLabels.length == 1){
+                      if (verticalLabels.length == 1) {
                         disableText = true;
                       }
                       return LabelHeaderTableTune2d(
@@ -109,8 +113,12 @@ class ShowSetting2D extends StatelessWidget {
             }),
           ),
           Positioned(
-            left: (verticalLabels.length > 1) ? width/horizontalLabels.length:0,
-            top: (verticalLabels.length > 1) ? height/verticalLabels.length: height/2,
+            left: (verticalLabels.length > 1)
+                ? width / horizontalLabels.length
+                : 0,
+            top: (verticalLabels.length > 1)
+                ? height / verticalLabels.length
+                : height / 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +129,7 @@ class ShowSetting2D extends StatelessWidget {
                   textStyle: labelStyle,
                 ),
                 const SizedBox(height: 5),
-                if(verticalName.isNotEmpty)
+                if (verticalName.isNotEmpty)
                   labelHead(
                     verticalName,
                     Icons.arrow_drop_down,
@@ -139,12 +147,14 @@ class ShowSetting2D extends StatelessWidget {
               children: [
                 _Button(
                   title: 'CANCEL',
+                  text: textCancel,
                   color: Colors.redAccent,
                   onPressed: onPressedCancel,
                 ),
                 const SizedBox(width: 10),
                 _Button(
                   title: 'SAVE',
+                  text: textSave,
                   color: Colors.blueAccent,
                   onPressed: onPressedSave,
                 ),
@@ -160,9 +170,7 @@ class ShowSetting2D extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.black54
-      ),
+          borderRadius: BorderRadius.circular(10), color: Colors.black54),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -207,11 +215,13 @@ class _Button extends StatelessWidget {
     required this.title,
     this.onPressed,
     required this.color,
+    this.text,
   });
 
   final String title;
   final Color color;
   final VoidCallback? onPressed;
+  final Widget? text;
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +232,7 @@ class _Button extends StatelessWidget {
           backgroundColor: color,
         ),
         onPressed: onPressed,
-        child: Text(title),
+        child: text ?? Text(title),
       ),
     );
   }

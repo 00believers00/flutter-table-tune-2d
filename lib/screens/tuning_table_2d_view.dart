@@ -27,6 +27,8 @@ class TuningTable2dView extends StatefulWidget {
     this.pointerSettings,
     this.tableType = TableType.tune,
     this.invertColor = false,
+    this.settingTextCancel,
+    this.settingTextSave,
   });
 
   final double width;
@@ -41,6 +43,8 @@ class TuningTable2dView extends StatefulWidget {
   final PointerSettings? pointerSettings;
   final TableType tableType;
   final bool invertColor;
+  final Widget? settingTextCancel;
+  final Widget? settingTextSave;
   @override
   State<TuningTable2dView> createState() => _TableTune2dViewState();
 }
@@ -57,12 +61,12 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
   @override
   void initState() {
     widget.pointerSettings?.addListener(() {
-      if(mounted){
+      if (mounted) {
         setState(() {});
       }
     });
     updateSubscription = widget.controller.updateData.listen((type) {
-      if(mounted){
+      if (mounted) {
         setState(() {});
       }
     });
@@ -86,7 +90,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
       width: widget.width,
       height: widget.height,
       child: Stack(
-        fit:  StackFit.expand,
+        fit: StackFit.expand,
         children: [
           GestureDetector(
             onPanStart: (a) {
@@ -148,6 +152,8 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
                         headerStyle: widget.headerStyle,
                         onPressedSave: onPressedSave,
                         onPressedCancel: onPressedCancel,
+                        textCancel: widget.settingTextCancel,
+                        textSave: widget.settingTextSave,
                       ),
                     ],
                   ),
@@ -155,7 +161,7 @@ class _TableTune2dViewState extends State<TuningTable2dView> {
               },
             ),
           ),
-          if(widget.tableType == TableType.preview)
+          if (widget.tableType == TableType.preview)
             Container(
               width: double.infinity,
               height: double.infinity,

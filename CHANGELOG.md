@@ -1,3 +1,6 @@
+## [0.0.14] - Update 2026-05-23
+- Add `settingTextCancel` and `settingTextSave` parameters to `TuningTable2dView` for customizing the cancel and save button widgets in the settings panel.
+
 ## ## [0.0.13] - Update 2026-04-10
 - Fix Edited TuningTable2dView to add a variable for inverting colors in the table. 
 ## [0.0.12] - Update 2026-02-15
